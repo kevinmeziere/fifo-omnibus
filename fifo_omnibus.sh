@@ -1,23 +1,23 @@
 #!/bin/bash
 
 # This installer is only to be used with this version
-fifo_version='0.9.0'
-branch='rel'
+fifo_version=0.9.1
+branch=rel
+dataset=f097790d-183d-44fa-b795-44ab5f82c64f
+# The ip of the fifo zone must be set here
+fifo_ip='192.168.1.53'
 
 # Default settings
 nic_tag='admin'
-fifo_gw=$(route get default | awk '/gateway/{print $2}')
-
-# The ip of the fifo zone must be set here
-fifo_ip='10.0.100.50'
+fifo_gw=$(route -n get default | awk '/gateway/{print $2}')
 
 # Sets the same dns as the global zone 
 # fifo_dns='"8.8.8.8', "8.8.4.4"'
-fifo_dns=$(cat /etc/resolv.conf | awk 'BEGIN{ORS=", "}/^nameserver/{print "\""$2"\""}')
+fifo_dns=$(grep dns_resolvers /usbkey/config | cut -d= -f2 | sed -e "s/\(.*\)/\"\1\"/" -e "s/,/\",\"/") 
 
 get_dataset()
 {
-imgadm get ${dataset} > /dev/null
+imgadm import ${dataset} > /dev/null
 if [ ! $? -eq 0 ]; then
   echo "Fetching latest dataset..."
   imgadm sources -a https://datasets.project-fifo.net
