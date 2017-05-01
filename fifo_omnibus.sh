@@ -54,34 +54,6 @@ cat > /var/tmp/fifo_aio.json << EOF
 EOF
 }
 
-create_leofs_AIO_manifest() {
-echo "Generating LeoFS AIO zone manifest..."
-cat > /var/tmp/leofs_aio.json << EOF
-{
- "autoboot": true,
- "brand": "joyent",
- "image_uuid": "e1faace4-e19b-11e5-928b-83849e2fd94a",
- "delegate_dataset": true,
- "max_physical_memory": 3072,
- "cpu_cap": 100,
- "alias": "1.leofs",
- "quota": "80",
- "resolvers": [
-  "10.0.100.1"
- ],
- "nics": [
-  {
-   "interface": "net0",
-   "nic_tag": "admin",
-   "ip": "10.0.100.51",
-   "gateway": "10.0.100.1",
-   "netmask": "255.255.255.0"
-  }
- ]
-}
-EOF
-}
-
 create_leofs_manager_manifest() {
 echo "Generating LeoFS Manager zone manifest..."
 cat > /var/tmp/leofs_manager.json << EOF
