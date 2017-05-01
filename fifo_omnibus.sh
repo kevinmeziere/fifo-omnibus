@@ -154,7 +154,7 @@ if [ $(uname) = 'SunOS' ]; then
           get_dataset
           create_fifo_AIO_manifest 
           if [ $(vmadm list alias=fifo -o uuid -H | wc -l) -eq 0 ]; then
-            create_zone 
+            vmadm create -f /var/tmp/fifo_aio.json
           else
             echo "A FiFo zone is already running"
             exit 1
