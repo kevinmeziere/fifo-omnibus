@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This installer is only to be used with this version
-fifo_version=0.9.1
+fifo_version=0.9.3
 branch=rel
 dataset=f097790d-183d-44fa-b795-44ab5f82c64f
 # The ip of the fifo zone must be set here
